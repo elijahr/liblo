@@ -155,6 +155,17 @@ AC_SEARCH_LIBS([recvfrom], [socket])
 AC_CHECK_FUNC([log], [], [AC_CHECK_LIB([m],[log])])
 AC_CHECK_FUNCS([getifaddrs])
 
+# clock_gettime might be defined in libc or librt
+AC_SEARCH_LIBS([clock_gettime], [c],
+  [AC_MSG_CHECKING([for CLOCK_REALTIME])
+   AC_COMPILE_IFELSE([AC_LANG_PROGRAM([
+      #include <time.h>
+      clockid_t id = CLOCK_REALTIME;])],
+    [AC_MSG_RESULT([yes])
+     AC_DEFINE([HAVE_CLOCK_REALTIME], [1], [Define to 1 if CLOCK_REALTIME is available.])],
+    [AC_MSG_RESULT([no])])],
+  [], [rt])
+
 # Check for whether threads are wanted, and if so, did we find libpthread.
 if test "x$want_threads" = "xyes"; then
   if test "x$with_win32_threads" = "xyes" && test "x$have_threads" = "xyes"; then

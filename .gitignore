@@ -10,6 +10,11 @@
 /autom4te.cache/
 /build/Makefile
 /build/Makefile.in
+/cmake/Makefile
+/cmake/Makefile.in
+/CMakeCache.txt
+/CMakeFiles/
+/cmake_install.cmake
 /compile
 /config.guess
 /config.h
@@ -35,6 +40,7 @@
 /examples/cpp_example
 /install-sh
 /liblo.pc
+/libloConfig.cmake
 /libtool
 /lo/Makefile
 /lo/Makefile.in
@@ -55,6 +61,9 @@
 /src/tools/Makefile.in
 /src/tools/oscdump
 /src/tools/oscsend
+/src/tools/oscsendfile
+/src/*.log
+/src/*.trs
 /stamp-h1
 /test
 /test-driver

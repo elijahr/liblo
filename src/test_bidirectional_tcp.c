@@ -7,6 +7,10 @@
 #include <pthread.h>
 #endif
 
+#ifdef __MACH__
+#include <signal.h>
+#endif
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <lo/lo.h>
@@ -66,6 +70,14 @@ void *sendthread(void *arg)
 
 int main()
 {
+#ifdef __MACH__
+    // OS X does not consistently respect SO_NOSIGPIPE set on sockets;
+    // the process would terminate with a SIGPIPE. Explicitly, globally
+    // ignoring the SIGPIPE signal works around the issue.
+    // See https://stackoverflow.com/questions/19509348/sigpipe-osx-and-disconnected-sockets
+    signal(SIGPIPE, SIG_IGN);
+#endif
+
     /* start a new server on port 7770 */
     lo_server s = lo_server_new_with_proto("7771", LO_TCP, 0);
     if (!s) { printf("no server\n"); exit(1); }
