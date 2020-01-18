@@ -1,3 +1,8 @@
+2020-01-19 Elijah Shaw-Rutschman <elijahr@gmail.com>
+	* Compatibility fixes (Mac OS X)
+	* Add OS X 10.11-10.14 to travis test matrix
+	* lo_timetag_now() uses clock_gettime(CLOCK_REALTIME) on platforms that support it
+
 2017-08-11 Stephen Sinclair <radarsat1@gmail.com>
 	* Compatibility fixes (Windows, FreeBSD)
 	* Configure options to modularize the build

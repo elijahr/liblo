@@ -1343,8 +1343,11 @@ void *lo_server_recv_raw_stream(lo_server s, size_t * size, int *psock)
             }
             if (data)
                 *psock = s->sockets[i].fd;
+
+#if defined(HAVE_SELECT) || defined(HAVE_POLL)
         }
     }
+#endif
 
     *psock = sock;
     return data;
